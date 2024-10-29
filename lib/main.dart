@@ -1,80 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'controllers/product_controller.dart';
+import 'controllers/category_controller.dart';
+import 'screens/product_list_screen.dart';
+import 'screens/category_list_screen.dart'; // Importe a tela de categorias
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductController()),
+        ChangeNotifierProvider(create: (_) => CategoryController()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lista de Tarefas',
-      home: TodoList(),
+      title: 'Product App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomeScreen(), // Use o HomeScreen como tela inicial
     );
   }
 }
 
-class TodoList extends StatefulWidget {
-  @override
-  _TodoListState createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
-  final TextEditingController _controller = TextEditingController();
-  final List<String> _items = [];
-
-  void _addItem() {
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        _items.add(_controller.text);
-        _controller.clear();
-      });
-    }
-  }
-
-  void _removeItem(int index) {
-    setState(() {
-      _items.removeAt(index);
-    });
-  }
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Tarefas'),
+        title: Text('Product App'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(labelText: 'Digite algo'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _addItem,
-              child: Text('Adicionar'),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _items.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(_items[index]),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () => _removeItem(index),
-                    ),
-                  );
-                },
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
               ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Produtos'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductListScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Categorias'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => CategoryListScreen()),
+                );
+              },
             ),
           ],
         ),
       ),
+      body: ProductListScreen(), // Tela padrão inicial
     );
   }
 }
