@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+// app_scaffold.dart
+// Importa as telas necessárias para navegação no aplicativo
 import 'package:ecommerce_front/screens/category_list_screen.dart';
 import 'package:ecommerce_front/screens/subcategory_list_screen.dart';
 import 'package:ecommerce_front/screens/product_list_screen.dart';
+import 'package:flutter/material.dart';
 
 // Classe AppScaffold, que define a estrutura básica do aplicativo
 class AppScaffold extends StatelessWidget {
@@ -97,20 +99,21 @@ class AppScaffold extends StatelessWidget {
                 );
               },
             ),
-            // Item de lista para navegação até a tela de subcategorias
+            // Outros itens do menu podem ser adicionados aqui
             ListTile(
-              title: Text('Subcategorias'), // Título do item "Subcategorias"
+              title: Text('Subategorias'), // Título do item "Categorias"
               onTap: () {
-                // Navega para a tela de lista de subcategorias ao selecionar o item
+                // Navega para a tela de lista de categorias ao selecionar o item
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        AppScaffold(bodyContent: SubCategoryListScreen()),
+                        AppScaffold(bodyContent: SubcategoryListScreen()),
                   ),
                 );
               },
             ),
+            // Outros itens do menu podem ser adicionados aqui
           ],
         ),
       ),

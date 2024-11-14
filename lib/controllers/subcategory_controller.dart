@@ -5,7 +5,7 @@ import '../services/subcategory_service.dart'; // Serviço para gerenciar subcat
 class SubcategoryController extends ChangeNotifier {
   final SubcategoryService _service = SubcategoryService();
   List<SubCategory> _subcategories =
-      []; // Mudança de Subcategory para SubCategory
+      []; // Usando o nome correto da classe SubCategory
 
   List<SubCategory> get subcategories => _subcategories;
 
@@ -21,7 +21,6 @@ class SubcategoryController extends ChangeNotifier {
 
   // Função para adicionar uma nova subcategoria
   Future<void> addSubcategory(SubCategory subcategory) async {
-    // Ajuste para SubCategory
     try {
       final addedSubcategory = await _service.addSubcategory(subcategory);
       _subcategories.add(addedSubcategory);

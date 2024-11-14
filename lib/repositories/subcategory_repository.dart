@@ -1,14 +1,13 @@
-import 'package:ecommerce_front/repositories/category_repository.dart';
-
 import '../models/subcategory.dart';
-import '../models/category.dart';
 
 class SubCategoryRepository {
   final List<SubCategory> _subCategories = [];
+  int _nextId = 1; // Variável para acompanhar o próximo ID disponível
 
   // Simula a latência de uma chamada a um backend
   Future<void> _simulateNetworkDelay() async {
-    await Future.delayed(Duration(seconds: 1)); // Simula um atraso de 1 segundo
+    await Future.delayed(
+        Duration(milliseconds: 10)); // Simula um atraso de 10 milisegundos
   }
 
   // Busca todas as subcategorias, incluindo suas categorias
@@ -17,24 +16,19 @@ class SubCategoryRepository {
         _subCategories); // Retorna uma cópia da lista de subcategorias
   }
 
+  // Função para criar uma nova subcategoria
   Future<SubCategory> createSubCategory(SubCategory subCategory) async {
     await _simulateNetworkDelay(); // Aguarda o atraso simulado
+    subCategory.id = _nextId++; // Atribui o próximo ID e incrementa a variável
     _subCategories.add(subCategory);
-
-    // Busca a categoria correspondente usando o CategoryRepository
-    final category = CategoryRepository().fetchCategories().then((categories) {
-      return categories.firstWhere(
-        (cat) => cat.id == subCategory.categoryId,
-        orElse: () => Category(id: 0, name: 'sem categoria'),
-      );
-    });
 
     // Retorna a subcategoria com a categoria associada
     return SubCategory(
-        id: subCategory.id,
-        name: subCategory.name,
-        categoryId: 1,
-        category: await category);
+      id: subCategory.id,
+      name: subCategory.name,
+      categoryId: subCategory.categoryId,
+      category: subCategory.category,
+    );
   }
 
   // Remove uma subcategoria da lista pelo ID
@@ -42,6 +36,4 @@ class SubCategoryRepository {
     await _simulateNetworkDelay(); // Aguarda o atraso simulado
     _subCategories.removeWhere((subCategory) => subCategory.id == id);
   }
-
-  // Adiciona uma nova categoria à lista
 }

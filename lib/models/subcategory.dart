@@ -1,11 +1,10 @@
 import 'package:ecommerce_front/models/category.dart';
 
 class SubCategory {
-  final int id;
-  final String name;
-  final int categoryId; // ID da categoria à qual a subcategoria pertence
-  final Category
-      category; // Objeto Category para acessar informações da categoria
+  int id;
+  String name;
+  int categoryId; // ID da categoria à qual a subcategoria pertence
+  Category category; // Objeto Category para acessar informações da categoria
 
   // Construtor da classe SubCategory
   SubCategory({
