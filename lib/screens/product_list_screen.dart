@@ -1,10 +1,8 @@
-// screens/product_list_screen.dart
-// screens/product_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/product_controller.dart'; // Importa o controlador de produtos
-import '../widgets/product_card.dart'; // Importa o widget ProductCard
-import 'add_product_popup.dart'; // Importa a tela de pop-up para adicionar novos produtos
+import 'add_product_popup.dart';
+import '../controllers/product_controller.dart';
+import '../widgets/product_card.dart';
 
 class ProductListScreen extends StatelessWidget {
   @override
@@ -49,7 +47,7 @@ class ProductListScreen extends StatelessWidget {
             },
             child: Icon(Icons.add), // Ícone '+' para adicionar produtos
             backgroundColor:
-                Colors.green, // Define a cor de fundo do botão como verde
+                Colors.blue, // Define a cor de fundo do botão como verde
           ),
         ),
       ],

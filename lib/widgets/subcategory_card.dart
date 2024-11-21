@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/subcategory.dart';
 import 'package:provider/provider.dart';
 import '../controllers/subcategory_controller.dart';
+import '../models/subcategory.dart';
 
 class SubcategoryCard extends StatelessWidget {
-  final SubCategory subcategory;
+  final Subcategory subcategory;
 
   SubcategoryCard({required this.subcategory})
       : super(key: ValueKey(subcategory.id));

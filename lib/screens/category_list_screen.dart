@@ -1,9 +1,8 @@
-// screens/category_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/category_controller.dart'; // Importa o controlador de categorias
-import '../widgets/category_card.dart'; // Importa o widget CategoryCard
-import 'add_category_popup.dart'; // Importa a tela de pop-up para adicionar novas categorias
+import 'add_category_popup.dart';
+import '../controllers/category_controller.dart';
+import '../widgets/category_card.dart';
 
 class CategoryListScreen extends StatelessWidget {
   @override

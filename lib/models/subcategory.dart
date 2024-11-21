@@ -1,22 +1,20 @@
-import 'package:ecommerce_front/models/category.dart';
+import '../models/category.dart';
 
-class SubCategory {
+class Subcategory {
   int id;
   String name;
-  int categoryId; // ID da categoria à qual a subcategoria pertence
-  Category category; // Objeto Category para acessar informações da categoria
+  int categoryId;
+  Category category;
 
-  // Construtor da classe SubCategory
-  SubCategory({
+  Subcategory({
     required this.id,
     required this.name,
     required this.categoryId,
     required this.category,
   });
 
-  // Fábrica que cria uma instância de SubCategory a partir de um JSON
-  factory SubCategory.fromJson(Map<String, dynamic> json) {
-    return SubCategory(
+  factory Subcategory.fromJson(Map<String, dynamic> json) {
+    return Subcategory(
       id: json['id'],
       name: json['name'],
       categoryId: json['category_id'],
@@ -24,7 +22,6 @@ class SubCategory {
     );
   }
 
-  // Método que converte uma instância de SubCategory para JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

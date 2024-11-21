@@ -1,29 +1,23 @@
 import '../models/subcategory.dart';
 
-class SubCategoryRepository {
-  final List<SubCategory> _subCategories = [];
-  int _nextId = 1; // Variável para acompanhar o próximo ID disponível
+class SubcategoryRepository {
+  final List<Subcategory> _subCategories = [];
+  int _nextId = 1;
 
-  // Simula a latência de uma chamada a um backend
   Future<void> _simulateNetworkDelay() async {
-    await Future.delayed(
-        Duration(milliseconds: 10)); // Simula um atraso de 10 milisegundos
+    await Future.delayed(Duration(milliseconds: 10));
   }
 
-  // Busca todas as subcategorias, incluindo suas categorias
-  Future<List<SubCategory>> fetchSubCategories() async {
-    return List.from(
-        _subCategories); // Retorna uma cópia da lista de subcategorias
+  Future<List<Subcategory>> fetchSubcategories() async {
+    return List.from(_subCategories);
   }
 
-  // Função para criar uma nova subcategoria
-  Future<SubCategory> createSubCategory(SubCategory subCategory) async {
-    await _simulateNetworkDelay(); // Aguarda o atraso simulado
-    subCategory.id = _nextId++; // Atribui o próximo ID e incrementa a variável
+  Future<Subcategory> createSubcategory(Subcategory subCategory) async {
+    await _simulateNetworkDelay();
+    subCategory.id = _nextId++;
     _subCategories.add(subCategory);
 
-    // Retorna a subcategoria com a categoria associada
-    return SubCategory(
+    return Subcategory(
       id: subCategory.id,
       name: subCategory.name,
       categoryId: subCategory.categoryId,
@@ -31,9 +25,8 @@ class SubCategoryRepository {
     );
   }
 
-  // Remove uma subcategoria da lista pelo ID
-  Future<void> deleteSubCategory(int id) async {
-    await _simulateNetworkDelay(); // Aguarda o atraso simulado
+  Future<void> deleteSubcategory(int id) async {
+    await _simulateNetworkDelay();
     _subCategories.removeWhere((subCategory) => subCategory.id == id);
   }
 }

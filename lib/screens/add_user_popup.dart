@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/category_controller.dart';
-import '../controllers/subcategory_controller.dart';
-import '../models/category.dart';
-import '../models/subcategory.dart';
+import '../controllers/role_controller.dart';
+import '../controllers/user_controller.dart';
+import '../models/role.dart';
+import '../models/user.dart';
 
-class AddSubcategoryPopup extends StatefulWidget {
+class AddUserPopup extends StatefulWidget {
   @override
-  _AddSubcategoryPopupState createState() => _AddSubcategoryPopupState();
+  _AddUserPopupState createState() => _AddUserPopupState();
 }
 
-class _AddSubcategoryPopupState extends State<AddSubcategoryPopup> {
+class _AddUserPopupState extends State<AddUserPopup> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
-  Category? _selectedCategory;
+  Role? _selectedRole;
 
   @override
   Widget build(BuildContext context) {
-    final categories = Provider.of<CategoryController>(context).categories;
+    final roles = Provider.of<RoleController>(context).roles;
 
     return AlertDialog(
       title: Text('Adicionar Subcategoria'),
@@ -27,10 +27,10 @@ class _AddSubcategoryPopupState extends State<AddSubcategoryPopup> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              decoration: InputDecoration(labelText: 'Nome da Subcategoria'),
+              decoration: InputDecoration(labelText: 'Nome da Role'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Informe o nome da subcategoria';
+                  return 'Informe o nome da role';
                 }
                 return null;
               },
@@ -38,17 +38,17 @@ class _AddSubcategoryPopupState extends State<AddSubcategoryPopup> {
                 _name = value!;
               },
             ),
-            DropdownButtonFormField<Category>(
-              decoration: InputDecoration(labelText: 'Categoria'),
-              items: categories.map((category) {
-                return DropdownMenuItem<Category>(
-                  value: category,
-                  child: Text(category.name),
+            DropdownButtonFormField<Role>(
+              decoration: InputDecoration(labelText: 'Role'),
+              items: roles.map((role) {
+                return DropdownMenuItem<Role>(
+                  value: role,
+                  child: Text(role.name),
                 );
               }).toList(),
               onChanged: (value) {
                 setState(() {
-                  _selectedCategory = value;
+                  _selectedRole = value;
                 });
               },
               validator: (value) {
@@ -73,14 +73,14 @@ class _AddSubcategoryPopupState extends State<AddSubcategoryPopup> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final newSubCategory = Subcategory(
+              final newUser = User(
                 id: 0,
                 name: _name,
-                categoryId: _selectedCategory!.id,
-                category: _selectedCategory!,
+                roleId: _selectedRole!.id,
+                role: _selectedRole!,
               );
-              Provider.of<SubcategoryController>(context, listen: false)
-                  .addSubcategory(newSubCategory);
+              Provider.of<UserController>(context, listen: false)
+                  .addUser(newUser);
               Navigator.of(context).pop();
             }
           },

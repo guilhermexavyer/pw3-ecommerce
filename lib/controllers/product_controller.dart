@@ -8,7 +8,6 @@ class ProductController extends ChangeNotifier {
 
   List<Product> get products => _products;
 
-  // Função para carregar os produtos
   Future<void> loadProducts() async {
     try {
       _products = await _service.getProducts();
@@ -18,7 +17,6 @@ class ProductController extends ChangeNotifier {
     }
   }
 
-  // Função para adicionar um novo produto
   Future<void> addProduct(Product product) async {
     try {
       final addedProduct = await _service.addProduct(product);
@@ -28,8 +26,6 @@ class ProductController extends ChangeNotifier {
       print('Error adding product: $e');
     }
   }
-
-  // Função para remover um produto
 
   Future<void> removeProduct(int id) async {
     try {

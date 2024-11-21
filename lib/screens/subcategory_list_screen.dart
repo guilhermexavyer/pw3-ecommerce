@@ -1,9 +1,8 @@
-// screens/subcategory_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/subcategory_controller.dart'; // Importa o controlador de subcategorias
-import '../widgets/subcategory_card.dart'; // Importa o widget SubcategoryCard
-import 'add_subcategory_popup.dart'; // Importa a tela de pop-up para adicionar novas subcategorias
+import 'add_subcategory_popup.dart';
+import '../controllers/subcategory_controller.dart';
+import '../widgets/subcategory_card.dart';
 
 class SubcategoryListScreen extends StatelessWidget {
   @override

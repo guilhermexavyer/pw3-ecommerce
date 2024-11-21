@@ -8,7 +8,6 @@ class CategoryController extends ChangeNotifier {
 
   List<Category> get categories => _categories;
 
-  // Função para carregar as categorias
   Future<void> loadCategories() async {
     try {
       _categories = await _service.getCategories();
@@ -18,7 +17,6 @@ class CategoryController extends ChangeNotifier {
     }
   }
 
-  // Função para adicionar uma nova categoria
   Future<void> addCategory(Category category) async {
     try {
       final addedCategory = await _service.addCategory(category);
@@ -29,7 +27,6 @@ class CategoryController extends ChangeNotifier {
     }
   }
 
-  // Função para remover uma categoria
   Future<void> removeCategory(int id) async {
     try {
       await _service.removeCategory(id);

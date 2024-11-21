@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/product_controller.dart';
-import '../controllers/category_controller.dart'; // Controlador para carregar as categorias
+import '../controllers/subcategory_controller.dart';
 import '../models/product.dart';
 import '../models/subcategory.dart';
-import '../models/category.dart';
 
 class AddProductPopup extends StatefulWidget {
   @override
@@ -15,17 +14,12 @@ class _AddProductPopupState extends State<AddProductPopup> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   double _price = 0.0;
-  int? _selectedCategoryId;
-
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<CategoryController>(context, listen: false).loadCategories();
-  }
+  Subcategory? _selectedSubCategory;
 
   @override
   Widget build(BuildContext context) {
-    final categories = Provider.of<CategoryController>(context).categories;
+    final subCategories =
+        Provider.of<SubcategoryController>(context).subcategories;
 
     return AlertDialog(
       title: Text('Adicionar Produto'),
@@ -59,22 +53,22 @@ class _AddProductPopupState extends State<AddProductPopup> {
                 _price = double.parse(value!);
               },
             ),
-            DropdownButtonFormField<int>(
-              decoration: InputDecoration(labelText: 'Categoria'),
-              items: categories.map((Category category) {
-                return DropdownMenuItem<int>(
-                  value: category.id,
-                  child: Text(category.name),
+            DropdownButtonFormField<Subcategory>(
+              decoration: InputDecoration(labelText: 'Subcategoria'),
+              items: subCategories.map((subCategory) {
+                return DropdownMenuItem<Subcategory>(
+                  value: subCategory,
+                  child: Text(subCategory.name),
                 );
               }).toList(),
               onChanged: (value) {
                 setState(() {
-                  _selectedCategoryId = value;
+                  _selectedSubCategory = value;
                 });
               },
               validator: (value) {
                 if (value == null) {
-                  return 'Selecione uma categoria';
+                  return 'Selecione uma subcategoria';
                 }
                 return null;
               },
@@ -98,14 +92,8 @@ class _AddProductPopupState extends State<AddProductPopup> {
                 id: 0,
                 name: _name,
                 price: _price,
-                subCategoryId: _selectedCategoryId!,
-                subCategory: SubCategory(
-                  id: _selectedCategoryId!,
-                  name: '',
-                  categoryId: _selectedCategoryId!,
-                  category: categories
-                      .firstWhere((cat) => cat.id == _selectedCategoryId!),
-                ),
+                subCategoryId: _selectedSubCategory!.id,
+                subCategory: _selectedSubCategory!,
               );
               Provider.of<ProductController>(context, listen: false)
                   .addProduct(newProduct);

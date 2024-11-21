@@ -1,27 +1,22 @@
-import 'package:ecommerce_front/models/product.dart';
+import '../models/product.dart';
 
 class ProductRepository {
   final List<Product> _products = [];
-  int _nextId = 1; // Variável para acompanhar o próximo ID disponível
+  int _nextId = 1;
 
-  // Simula a latência de uma chamada a um backend
   Future<void> _simulateNetworkDelay() async {
-    await Future.delayed(
-        Duration(milliseconds: 10)); // Simula um atraso de 10 milisegundos
+    await Future.delayed(Duration(milliseconds: 10));
   }
 
-  // Busca todos os produtos
   Future<List<Product>> fetchProducts() async {
-    return List.from(_products); // Retorna uma cópia da lista de produtos
+    return List.from(_products);
   }
 
-  // Função para criar um novo produto
   Future<Product> createProduct(Product product) async {
-    await _simulateNetworkDelay(); // Aguarda o atraso simulado
-    product.id = _nextId++; // Atribui o próximo ID e incrementa a variável
+    await _simulateNetworkDelay();
+    product.id = _nextId++;
     _products.add(product);
 
-    // Retorna o produto com a subcategoria associada
     return Product(
       id: product.id,
       name: product.name,
@@ -31,9 +26,8 @@ class ProductRepository {
     );
   }
 
-  // Remove um produto da lista pelo ID
   Future<void> deleteProduct(int id) async {
-    await _simulateNetworkDelay(); // Aguarda o atraso simulado
+    await _simulateNetworkDelay();
     _products.removeWhere((product) => product.id == id);
   }
 }

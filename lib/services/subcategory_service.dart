@@ -2,17 +2,17 @@ import '../models/subcategory.dart';
 import '../repositories/subcategory_repository.dart';
 
 class SubcategoryService {
-  final SubCategoryRepository _repository = SubCategoryRepository();
+  final SubcategoryRepository _repository = SubcategoryRepository();
 
-  Future<List<SubCategory>> getSubcategories() {
-    return _repository.fetchSubCategories();
+  Future<List<Subcategory>> getSubcategories() {
+    return _repository.fetchSubcategories();
   }
 
-  Future<SubCategory> addSubcategory(SubCategory subcategory) {
-    return _repository.createSubCategory(subcategory);
+  Future<Subcategory> addSubcategory(Subcategory subcategory) {
+    return _repository.createSubcategory(subcategory);
   }
 
   Future<void> removeSubcategory(int id) {
-    return _repository.deleteSubCategory(id);
+    return _repository.deleteSubcategory(id);
   }
 }
