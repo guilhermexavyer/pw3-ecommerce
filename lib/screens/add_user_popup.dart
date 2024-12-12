@@ -27,7 +27,7 @@ class _AddUserPopupState extends State<AddUserPopup> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              decoration: InputDecoration(labelText: 'Nome da Role'),
+              decoration: InputDecoration(labelText: 'Nome de Usuário'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Informe o nome da role';
