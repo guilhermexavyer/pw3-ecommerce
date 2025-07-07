@@ -1,3 +1,3 @@
-# Sistema de e-commerce
+# Projeto de e-commerce
 
-Este é um projeto que foi desenvolvido para a disciplina **Programação I** do curso **Tecnologia em Análise e Desenvolvimento de Sistemas**, ministrada pelo professor **Romildo Junior**, docente do **Instituto Federal de Goiás, Câmpus Jataí, Unidade Flamboyant**.
+Projeto desenvolvido no âmbito da disciplina **Programação para Web III**, com supervisão do professor **Murilo Silva**, docente do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas** do **Instituto Federal de Goiás – Câmpus Jataí, Unidade Flamboyant.**
